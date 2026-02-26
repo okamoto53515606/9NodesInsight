@@ -18,18 +18,18 @@ import {z} from 'genkit';
  */
 const GeneratePhilosophicalProfileInputSchema = z.object({
   favoriteSongs: z
-    .array(z.string())
+    .array(z.string().max(100, '100文字以内で入力してください。'))
     .length(3)
     .describe('ユーザーが好きな曲3つ'),
   favoriteBooks: z
-    .array(z.string())
+    .array(z.string().max(100, '100文字以内で入力してください。'))
     .length(3)
     .describe('ユーザーが好きな本3つ'),
   favoriteWords: z
-    .array(z.string())
+    .array(z.string().max(100, '100文字以内で入力してください。'))
     .length(3)
     .describe('ユーザーが好きな言葉3つ'),
-  messageToAI: z.string().describe('ユーザーからAIへの一言'),
+  messageToAI: z.string().max(100, '100文字以内で入力してください。').describe('ユーザーからAIへの一言'),
 });
 export type GeneratePhilosophicalProfileInput = z.infer<
   typeof GeneratePhilosophicalProfileInputSchema
@@ -68,9 +68,28 @@ const generatePhilosophicalProfileFlow = ai.defineFlow(
     outputSchema: GeneratePhilosophicalProfileOutputSchema,
   },
   async input => {
-    const {output} = await generatePhilosophicalProfilePrompt(input);
+    const response = await generatePhilosophicalProfilePrompt(input);
+    const output = response.output;
+
     if (!output) {
-      throw new Error('Failed to generate philosophical profile: No output received.');
+      let errorDetails = 'AIから有効な応答がありませんでした。';
+      const candidate = response.candidates[0];
+      if (candidate) {
+        errorDetails += ` 理由: ${candidate.finishReason}`;
+        if (candidate.finishMessage) {
+          errorDetails += `, メッセージ: ${candidate.finishMessage}`;
+        }
+        if (candidate.safetyRatings && candidate.safetyRatings.length > 0) {
+          errorDetails += `, 安全性評価: ${JSON.stringify(
+            candidate.safetyRatings
+          )}`;
+        }
+      }
+      const rawText = response.text;
+      if (rawText) {
+        errorDetails += `\nAIの生テキスト応答: "${rawText}"`;
+      }
+      throw new Error(errorDetails);
     }
     return output;
   }

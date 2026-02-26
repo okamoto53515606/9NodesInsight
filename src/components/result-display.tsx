@@ -26,7 +26,7 @@ export function ResultDisplay({
           <div className="mx-auto mb-2 flex items-center gap-2">
             <Logo className="h-8 w-8 text-primary" />
             <CardTitle className="text-3xl font-headline">
-              あなたの哲学プロファイル
+              あなたの哲学分析
             </CardTitle>
           </div>
           <CardDescription>
@@ -40,7 +40,7 @@ export function ResultDisplay({
         </CardContent>
         <CardFooter>
           <Button onClick={onReset} className="w-full" size="lg" variant="outline">
-            もう一度プロファイリングする
+            もう一度分析する
           </Button>
         </CardFooter>
       </Card>

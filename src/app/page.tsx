@@ -31,7 +31,7 @@ export default function Home() {
       toast({
         title: 'エラー',
         description:
-          'プロファイルの生成に失敗しました。時間をおいて再度お試しください。',
+          '分析に失敗しました。時間をおいて再度お試しください。',
         variant: 'destructive',
       });
     }

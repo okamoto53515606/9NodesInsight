@@ -28,19 +28,19 @@ import { Logo } from './icons';
 import { Loader2 } from 'lucide-react';
 
 const formSchema = z.object({
-  song1: z.string().min(1, '入力は必須です。'),
-  song2: z.string().min(1, '入力は必須です。'),
-  song3: z.string().min(1, '入力は必須です。'),
-  book1: z.string().min(1, '入力は必須です。'),
-  book2: z.string().min(1, '入力は必須です。'),
-  book3: z.string().min(1, '入力は必須です。'),
-  word1: z.string().min(1, '入力は必須です。'),
-  word2: z.string().min(1, '入力は必須です。'),
-  word3: z.string().min(1, '入力は必須です。'),
+  song1: z.string().min(1, '入力は必須です。').max(100, '100文字以内で入力してください。'),
+  song2: z.string().min(1, '入力は必須です。').max(100, '100文字以内で入力してください。'),
+  song3: z.string().min(1, '入力は必須です。').max(100, '100文字以内で入力してください。'),
+  book1: z.string().min(1, '入力は必須です。').max(100, '100文字以内で入力してください。'),
+  book2: z.string().min(1, '入力は必須です。').max(100, '100文字以内で入力してください。'),
+  book3: z.string().min(1, '入力は必須です。').max(100, '100文字以内で入力してください。'),
+  word1: z.string().min(1, '入力は必須です。').max(100, '100文字以内で入力してください。'),
+  word2: z.string().min(1, '入力は必須です。').max(100, '100文字以内で入力してください。'),
+  word3: z.string().min(1, '入力は必須です。').max(100, '100文字以内で入力してください。'),
   messageToAI: z
     .string()
     .min(1, '入力は必須です。')
-    .max(200, '200文字以内で入力してください。'),
+    .max(100, '100文字以内で入力してください。'),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -118,7 +118,7 @@ export function InputForm({
             </CardTitle>
           </div>
           <CardDescription>
-            10個の入力から、あなたの深層にある「構造の哲学」をプロファイリングします。
+            10個の入力から、あなたの深層にある「構造の哲学」を分析します。
           </CardDescription>
         </CardHeader>
         <Form {...form}>
@@ -128,7 +128,7 @@ export function InputForm({
                 <div key={category} className="space-y-4">
                   <div className="flex items-baseline gap-2">
                     <h3 className="font-semibold text-lg text-primary">{label}</h3>
-                    <span className="text-sm text-muted-foreground">を3つ入力してください</span>
+                    <span className="text-sm text-muted-foreground">※3つ入力してください</span>
                     {example && (
                       <span className="text-sm text-muted-foreground">{example}</span>
                     )}
@@ -188,7 +188,7 @@ export function InputForm({
                 {isSubmitting && (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 )}
-                プロファイリングを開始
+                分析を開始
               </Button>
             </CardFooter>
           </form>

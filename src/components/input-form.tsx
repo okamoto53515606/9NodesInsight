@@ -128,6 +128,7 @@ export function InputForm({
                 <div key={category} className="space-y-4">
                   <div className="flex items-baseline gap-2">
                     <h3 className="font-semibold text-lg text-primary">{label}</h3>
+                    <span className="text-sm text-muted-foreground">を3つ入力してください</span>
                     {example && (
                       <span className="text-sm text-muted-foreground">{example}</span>
                     )}

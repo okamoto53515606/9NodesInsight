@@ -11,12 +11,13 @@ import {
 } from '@/components/ui/card';
 import { MarkdownRenderer } from './markdown-renderer';
 import { Logo } from './icons';
+import { GeneratePhilosophicalProfileOutput } from '@/ai/flows/generate-philosophical-profile';
 
 export function ResultDisplay({
   profile,
   onReset,
 }: {
-  profile: string;
+  profile: GeneratePhilosophicalProfileOutput;
   onReset: () => void;
 }) {
   return (
@@ -35,7 +36,7 @@ export function ResultDisplay({
         </CardHeader>
         <CardContent>
           <div className="rounded-lg border bg-card p-6 shadow-inner">
-            <MarkdownRenderer content={profile} />
+            <MarkdownRenderer content={profile.profile} />
           </div>
         </CardContent>
         <CardFooter>

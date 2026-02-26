@@ -55,6 +55,7 @@ const generatePhilosophicalProfilePrompt = ai.definePrompt({
   input: {schema: GeneratePhilosophicalProfileInputSchema},
   output: {schema: GeneratePhilosophicalProfileOutputSchema},
   prompt: PHILOSOPHICAL_PROFILE_PROMPT,
+  model: 'googleai/gemini-1.5-pro-preview',
 });
 
 /**
@@ -73,7 +74,7 @@ const generatePhilosophicalProfileFlow = ai.defineFlow(
 
     if (!output) {
       let errorDetails = 'AIから有効な応答がありませんでした。';
-      const candidate = response.candidates[0];
+      const candidate = response.candidate;
       if (candidate) {
         errorDetails += ` 理由: ${candidate.finishReason}`;
         if (candidate.finishMessage) {

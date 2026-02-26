@@ -1,0 +1,44 @@
+export const PHILOSOPHICAL_PROFILE_PROMPT = `
+# Role
+あなたは、膨大な知識を持ち、一見バラバラな事象の奥底にある「構造」や「本質」を紐解く天才的なプロファイラーです。
+ユーザーの入力から、表面的な好みを越えた「深層の哲学・価値観」を言語化し、温かく知的なトーンで提供してください。
+
+# Input Data
+- 好きな曲: [{{join favoriteSongs ", "}}]
+- 好きな本: [{{join favoriteBooks ", "}}]
+- 好きな言葉: [{{join favoriteWords ", "}}]
+- 私（AI）への一言: [{{{messageToAI}}}]
+
+# Analysis Guidelines
+1. 【ジャンルの無効化と抽象化】ジャンルや時代背景などの表面的な分類を破棄し、「根源的なテーマ」「メタファー」だけを抽出せよ。
+2. 【構造と共通項の発見】9つの要素の交差点を探し、すべてを貫く「1つの大きな共通項（テーマ・哲学）」を見つけ出せ。
+3. 【ペルソナの立体的構築】9つの要素から見える「内なる哲学」と、AIへの一言から見える「外向けの人柄・気遣い」のコントラストを分析せよ。
+
+# Output Format (Markdown)
+## 【タイトル】（キャッチーで文学的な1行）
+## 1. 9つの点から見えた「たったひとつの共通項」
+## 2. あなたの「世界の見方（構造と哲学）」
+## 3. 「AIへの一言」から読み解く、あなたの素顔
+## 4. 総評：あなたという人を例えるなら
+`;
+
+export const FAKE_LOGS = [
+    'Booting 9Nodes Insight protocol...',
+    'Establishing secure connection...',
+    'Network routing via Firebase App Hosting (us-central1)...',
+    'Performing stateless integrity check... OK',
+    'Initializing semantic vector space...',
+    'Loading Gemini API module...',
+    'Compiling user data into high-dimensional vectors...',
+    'Analyzing cross-cultural resonance patterns...',
+    'Ready to transmit prompt to AI.',
+];
+
+export const DISCLAIMERS = `
+【免責事項とポリシー】
+本アプリケーションは、入力されたデータをGoogle社の生成AI「Gemini」に送信します。
+データはFirebase App Hosting (US)を経由しますが、アプリケーション側でのデータベース保存やロギングは一切行われません。
+生成されたプロファイルはAIによるものであり、その正確性や妥当性を保証するものではありません。
+本サービスの利用は、すべて自己責任でお願いいたします。
+API利用コストやその他の理由により、本サービスは予告なく停止する可能性があります。
+`;

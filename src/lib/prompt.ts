@@ -22,18 +22,6 @@ export const PHILOSOPHICAL_PROFILE_PROMPT = `
 ## 4. 総評：あなたという人を例えるなら
 `;
 
-export const FAKE_LOGS = [
-    'Booting 9Nodes Insight protocol...',
-    'Establishing secure connection...',
-    'Network routing via Firebase App Hosting (us-central1)...',
-    'Performing stateless integrity check... OK',
-    'Initializing semantic vector space...',
-    'Loading Gemini API module...',
-    'Compiling user data into high-dimensional vectors...',
-    'Analyzing cross-cultural resonance patterns...',
-    'Ready to transmit prompt to AI.',
-];
-
 export const DISCLAIMERS = `
 【免責事項とポリシー】
 本アプリケーションは、入力されたデータをGoogle社の生成AI「Gemini」に送信します。

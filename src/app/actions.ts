@@ -14,6 +14,7 @@ export async function getPhilosophicalProfile(
   } catch (error) {
     console.error('Error generating philosophical profile:', error);
     // In a real app, you might want to log this error to a monitoring service
-    return { success: false, error: 'Failed to generate profile.' };
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred.';
+    return { success: false, error: `分析に失敗しました。詳細: ${errorMessage}` };
   }
 }

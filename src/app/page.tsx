@@ -30,8 +30,7 @@ export default function Home() {
       setStep('form');
       toast({
         title: 'エラー',
-        description:
-          '分析に失敗しました。時間をおいて再度お試しください。',
+        description: response.error || '分析に失敗しました。時間をおいて再度お試しください。',
         variant: 'destructive',
       });
     }

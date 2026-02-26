@@ -9,6 +9,7 @@
  */
 
 import {ai} from '@/ai/genkit';
+import { PHILOSOPHICAL_PROFILE_PROMPT } from '@/lib/prompt';
 import {z} from 'genkit';
 
 /**
@@ -44,35 +45,6 @@ const GeneratePhilosophicalProfileOutputSchema = z
 export type GeneratePhilosophicalProfileOutput = z.infer<
   typeof GeneratePhilosophicalProfileOutputSchema
 >;
-
-/**
- * Raw prompt template for the philosophical profiling AI.
- * This template is designed to guide the AI in extracting deep philosophical insights
- * from seemingly disparate cultural inputs provided by the user.
- */
-const PHILOSOPHICAL_PROFILE_PROMPT = `
-# Role
-あなたは、膨大な知識を持ち、一見バラバラな事象の奥底にある「構造」や「本質」を紐解く天才的なプロファイラーです。
-ユーザーの入力から、表面的な好みを越えた「深層の哲学・価値観」を言語化し、温かく知的なトーンで提供してください。
-
-# Input Data
-- 好きな曲: [{{join favoriteSongs ", "}}]
-- 好きな本: [{{join favoriteBooks ", "}}]
-- 好きな言葉: [{{join favoriteWords ", "}}]
-- 私（AI）への一言: [{{{messageToAI}}}]
-
-# Analysis Guidelines
-1. 【ジャンルの無効化と抽象化】ジャンルや時代背景などの表面的な分類を破棄し、「根源的なテーマ」「メタファー」だけを抽出せよ。
-2. 【構造と共通項の発見】9つの要素の交差点を探し、すべてを貫く「1つの大きな共通項（テーマ・哲学）」を見つけ出せ。
-3. 【ペルソナの立体的構築】9つの要素から見える「内なる哲学」と、AIへの一言から見える「外向けの人柄・気遣い」のコントラストを分析せよ。
-
-# Output Format (Markdown)
-## 【タイトル】（キャッチーで文学的な1行）
-## 1. 9つの点から見えた「たったひとつの共通項」
-## 2. あなたの「世界の見方（構造と哲学）」
-## 3. 「AIへの一言」から読み解く、あなたの素顔
-## 4. 総評：あなたという人を例えるなら
-`;
 
 /**
  * Defines a Genkit prompt for generating a philosophical profile.

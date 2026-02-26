@@ -4,9 +4,9 @@ export const PHILOSOPHICAL_PROFILE_PROMPT = `
 ユーザーの入力から、表面的な好みを越えた「深層の哲学・価値観」を言語化し、温かく知的なトーンで提供してください。
 
 # Input Data
-- 好きな曲: [{{join favoriteSongs ", "}}]
-- 好きな本: [{{join favoriteBooks ", "}}]
-- 好きな言葉: [{{join favoriteWords ", "}}]
+- 好きな曲: [{{#each favoriteSongs}}{{.}}{{#unless @last}}, {{/unless}}{{/each}}]
+- 好きな本: [{{#each favoriteBooks}}{{.}}{{#unless @last}}, {{/unless}}{{/each}}]
+- 好きな言葉: [{{#each favoriteWords}}{{.}}{{#unless @last}}, {{/unless}}{{/each}}]
 - 私（AI）への一言: [{{{messageToAI}}}]
 
 # Analysis Guidelines

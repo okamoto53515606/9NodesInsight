@@ -50,7 +50,7 @@ export default function Home() {
         return <ResultDisplay profile={result} onReset={handleReset} />;
       case 'form':
       default:
-        return <InputForm onSubmit={handleStart} />;
+        return <InputForm onSubmit={handleStart} initialData={formData} />;
     }
   };
 

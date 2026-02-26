@@ -76,22 +76,24 @@ const formFields: {
 
 export function InputForm({
   onSubmit,
+  initialData,
 }: {
   onSubmit: (data: GeneratePhilosophicalProfileInput) => void;
+  initialData?: GeneratePhilosophicalProfileInput | null;
 }) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      song1: '',
-      song2: '',
-      song3: '',
-      book1: '',
-      book2: '',
-      book3: '',
-      word1: '',
-      word2: '',
-      word3: '',
-      messageToAI: '',
+      song1: initialData?.favoriteSongs?.[0] || '',
+      song2: initialData?.favoriteSongs?.[1] || '',
+      song3: initialData?.favoriteSongs?.[2] || '',
+      book1: initialData?.favoriteBooks?.[0] || '',
+      book2: initialData?.favoriteBooks?.[1] || '',
+      book3: initialData?.favoriteBooks?.[2] || '',
+      word1: initialData?.favoriteWords?.[0] || '',
+      word2: initialData?.favoriteWords?.[1] || '',
+      word3: initialData?.favoriteWords?.[2] || '',
+      messageToAI: initialData?.messageToAI || '',
     },
   });
 

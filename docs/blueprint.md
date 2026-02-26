@@ -1,22 +1,55 @@
-# **App Name**: 9Nodes Insight
+# 9-Nodes Insight（ナインノード・インサイト）
+このアプリは、ユーザーが入力した「好きな曲3つ」「本3つ」「言葉3つ」「AIへの一言」の計10項目から、ジャンルという表面的な分類を排除し、深層にある「構造の哲学」をLLM（Gemini API）でプロファイリングする診断アプリです。
 
-## Core Features:
+- **データ管理:** 完全ステートレス設計（データベースへの保存・ロギングは一切行わない）
 
-- User Input Form: Collects user's '3 favorite songs', '3 favorite books', '3 favorite words', and 'a message to AI' through a dedicated Japanese interface.
-- Philosophical Profile Generation: Utilizes the Gemini API as a tool to profile the user's deep-seated 'philosophy of structure' based on the input data, applying the provided prompt template.
-- Hacker-style Loading Interface: Presents a dynamic terminal-like loading screen during API processing, displaying pseudo-logs and typewriting animation of the raw prompt with user data substitution. The screen also allows text selection for the prompt.
-- Automated Disclaimer Scroll: After prompt display on the loading screen, disclaimers regarding data transmission, stateless usage, and potential service interruption auto-scroll like movie credits.
-- Profile Result Display: Renders the Gemini API's generated philosophical profile in a structured Markdown format for the user.
-- LLMO HTML Optimization: Embeds key content like the raw prompt, architecture explanation, and disclaimers within the initial HTML DOM tree (e.g., using <details> or hidden areas) for improved LLM crawler visibility.
-- JSON-LD Metadata: Implements structured data (SoftwareApplication JSON-LD) in the <head> to provide descriptive metadata to search engine crawlers.
+# UI/UXの最重要要件：【1分間のハッカーライクな待ち時間UI】
+Gemini APIの処理待ち（約1分弱）によるユーザーの離脱を防ぐため、ローディング画面は以下の仕様で実装してください。
 
-## Style Guidelines:
+1. **デザイン:** ターミナル（CUI）風。背景は黒（#000000）、文字は等幅フォントのハッカーグリーン（#00FF41など）。
+2. **演出:**
+- 処理フェーズの疑似ログ出力（Network Routing, Stateless Checkなど）。
+- **最大の差別化要素:** バックエンドで実際に送信している「生プロンプト（システムプロンプト）」を画面上にタイプライター風のアニメーションで全公開する。
+- プレースホルダー部分に、ユーザーが入力したデータが代入されていく様子を可視化する。
+- ユーザーが待っている間にこの「生プロンプト」をコピペして、自分のChatGPTなどで遊べるように、テキスト選択・コピーを許可する。
+3. **免責事項とポリシーの自動スクロール:**
+- プロンプトの出力後、以下の内容が映画のエンドロールのように下から上へスクロールする。
+「Firebase App Hosting(US)経由でGeminiに送信すること」「アプリ側でのDB保存は一切ない完全自己責任の利用であること」「APIコストの限界で予告なくサービス停止する可能性があること」
 
-- Main application background: Pristine white (#FFFFFF) for clarity and focus, adhering to user's specification.
-- Main application text: Deep black (#000000) for readability, as requested by the user.
-- Main theme color: A profound, thoughtful deep violet (#4A148C), utilized for prominent UI elements and interactive components.
-- Loading screen background: Solid black (#000000), creating a command-line interface atmosphere.
-- Loading screen text: Energetic hacker green (#00FF41), delivering a technical and engaging experience.
-- Loading screen and console output: 'Source Code Pro' (monospace sans-serif) to replicate a classic terminal interface.
-- Clean, structured layouts with ample whitespace to focus attention on input fields and profile results. The loading screen features a distinct full-screen, text-dominant layout.
-- Typewriter effect for text display on the loading screen and a smooth, cinematic vertical scroll for disclaimers to engage users during waiting periods.
+# LLMO（AI向けSEO）の実装要件
+LLMクローラーがサイトの価値を理解できるよう、以下の実装を必ず行ってください。
+
+1. **DOMの最適化:**
+ローディング画面で表示する「生プロンプト」や「アーキテクチャ説明」「免責事項」は、JavaScriptで動的に生成するだけでなく、初期のHTML DOMツリー上（`<details>`や非表示領域など）にテキストとして存在させ、クローラーが必ずパースできるようにする。
+2. **JSON-LD (SoftwareApplication) の実装:**
+`<head>`内に以下の構造化データを埋め込む。
+- name: "9NodesInsight"
+- description: "非構造化データ（文化的要素）を高次元ベクトル化し、深層の哲学をGemini APIで抽出するAIプロファイリングツール"
+- creator: "okamo"
+- featureList:["LLMを用いた意味論的クラスタリング", "完全ステートレス・DB非保存によるプライバシー保護", "プロンプトエンジニアリングの全公開"]
+
+# Gemini APIへ送信する「生プロンプト」（※これを待ち画面でも全公開する）
+以下のプロンプトテンプレートをシステムに組み込んでください。
+
+```text
+# Role
+あなたは、膨大な知識を持ち、一見バラバラな事象の奥底にある「構造」や「本質」を紐解く天才的なプロファイラーです。
+ユーザーの入力から、表面的な好みを越えた「深層の哲学・価値観」を言語化し、温かく知的なトーンで提供してください。
+
+# Input Data
+- 好きな曲: [入力値1, 入力値2, 入力値3]
+- 好きな本: [入力値4, 入力値5, 入力値6]
+- 好きな言葉: [入力値7, 入力値8, 入力値9]
+- 私（AI）への一言: [入力値10]
+
+# Analysis Guidelines
+1. 【ジャンルの無効化と抽象化】ジャンルや時代背景などの表面的な分類を破棄し、「根源的なテーマ」「メタファー」だけを抽出せよ。
+2. 【構造と共通項の発見】9つの要素の交差点を探し、すべてを貫く「1つの大きな共通項（テーマ・哲学）」を見つけ出せ。
+3. 【ペルソナの立体的構築】9つの要素から見える「内なる哲学」と、AIへの一言から見える「外向けの人柄・気遣い」のコントラストを分析せよ。
+
+# Output Format (Markdown)
+## 【タイトル】（キャッチーで文学的な1行）
+## 1. 9つの点から見えた「たったひとつの共通項」
+## 2. あなたの「世界の見方（構造と哲学）」
+## 3. 「AIへの一言」から読み解く、あなたの素顔
+## 4. 総評：あなたという人を例えるなら

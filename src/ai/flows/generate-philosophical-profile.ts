@@ -11,6 +11,7 @@
 import {ai} from '@/ai/genkit';
 import { PHILOSOPHICAL_PROFILE_PROMPT } from '@/lib/prompt';
 import {z} from 'genkit';
+import {googleAI} from '@genkit-ai/google-genai';
 
 /**
  * Zod schema for the input to the philosophical profile generation flow.
@@ -54,7 +55,8 @@ const generatePhilosophicalProfilePrompt = ai.definePrompt({
   name: 'generatePhilosophicalProfilePrompt',
   input: {schema: GeneratePhilosophicalProfileInputSchema},
   output: {schema: GeneratePhilosophicalProfileOutputSchema},
-  prompt: PHILOSOPHICAL_PROFILE_PROMPT
+  prompt: PHILOSOPHICAL_PROFILE_PROMPT,
+  model: googleAI.model('gemini-1.5-flash-latest'),
 });
 
 /**
@@ -68,8 +70,27 @@ const generatePhilosophicalProfileFlow = ai.defineFlow(
     outputSchema: GeneratePhilosophicalProfileOutputSchema,
   },
   async input => {
-    const {output} = await generatePhilosophicalProfilePrompt(input);
-    return output!;
+    const response = await generatePhilosophicalProfilePrompt(input);
+    const output = response.output;
+
+    if (output === null || output === undefined) {
+      const finishReason = response.candidate?.finishReason;
+      const safetyRatings = response.candidate?.safetyRatings;
+      let errorMessage = `AI analysis failed. The model returned no content.`;
+      if (finishReason) {
+        errorMessage += ` Finish reason: ${finishReason}.`;
+      }
+      if (safetyRatings) {
+        errorMessage += ` Safety ratings: ${JSON.stringify(
+          safetyRatings,
+          null,
+          2
+        )}`;
+      }
+      throw new Error(errorMessage);
+    }
+
+    return output;
   }
 );
 

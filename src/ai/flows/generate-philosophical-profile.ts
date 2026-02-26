@@ -54,8 +54,7 @@ const generatePhilosophicalProfilePrompt = ai.definePrompt({
   name: 'generatePhilosophicalProfilePrompt',
   input: {schema: GeneratePhilosophicalProfileInputSchema},
   output: {schema: GeneratePhilosophicalProfileOutputSchema},
-  prompt: PHILOSOPHICAL_PROFILE_PROMPT,
-  model: 'googleai/gemini-1.5-pro-preview',
+  prompt: PHILOSOPHICAL_PROFILE_PROMPT
 });
 
 /**

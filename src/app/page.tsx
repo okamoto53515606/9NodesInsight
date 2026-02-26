@@ -32,6 +32,7 @@ export default function Home() {
         title: 'エラー',
         description: response.error || '分析に失敗しました。時間をおいて再度お試しください。',
         variant: 'destructive',
+        duration: Infinity,
       });
     }
   };

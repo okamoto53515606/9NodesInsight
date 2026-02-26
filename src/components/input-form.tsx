@@ -57,14 +57,14 @@ const formFields: {
     label: '好きな曲',
     example: '（例）Vaundy「怪獣の花唄」',
     keys: ['song1', 'song2', 'song3'],
-    placeholders: ['アーティスト名「曲名」', '好きな曲 2', '好きな曲 3'],
+    placeholders: ['好きな曲 1', '好きな曲 2', '好きな曲 3'],
   },
   {
     category: 'book',
     label: '好きな本',
     example: '（例）東野圭吾「白鳥とコウモリ」',
     keys: ['book1', 'book2', 'book3'],
-    placeholders: ['著者名「書籍名」', '好きな本 2', '好きな本 3'],
+    placeholders: ['好きな本 1', '好きな本 2', '好きな本 3'],
   },
   {
     category: 'word',

@@ -49,10 +49,26 @@ const formFields: {
   category: 'song' | 'book' | 'word';
   label: string;
   keys: (keyof FormValues)[];
+  placeholders: string[];
 }[] = [
-  { category: 'song', label: '好きな曲', keys: ['song1', 'song2', 'song3'] },
-  { category: 'book', label: '好きな本', keys: ['book1', 'book2', 'book3'] },
-  { category: 'word', label: '好きな言葉', keys: ['word1', 'word2', 'word3'] },
+  {
+    category: 'song',
+    label: '好きな曲',
+    keys: ['song1', 'song2', 'song3'],
+    placeholders: ['（例）Vaundy「怪獣の花唄」', '好きな曲 2', '好きな曲 3'],
+  },
+  {
+    category: 'book',
+    label: '好きな本',
+    keys: ['book1', 'book2', 'book3'],
+    placeholders: ['（例）東野圭吾「白鳥とコウモリ」', '好きな本 2', '好きな本 3'],
+  },
+  {
+    category: 'word',
+    label: '好きな言葉',
+    keys: ['word1', 'word2', 'word3'],
+    placeholders: ['好きな言葉 1', '好きな言葉 2', '好きな言葉 3'],
+  },
 ];
 
 export function InputForm({
@@ -105,7 +121,7 @@ export function InputForm({
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleFormSubmit)}>
             <CardContent className="space-y-8">
-              {formFields.map(({ category, label, keys }) => (
+              {formFields.map(({ category, label, keys, placeholders }) => (
                 <div key={category} className="space-y-4">
                   <h3 className="font-semibold text-lg text-primary">{label}</h3>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -121,7 +137,7 @@ export function InputForm({
                             }`}</FormLabel>
                             <FormControl>
                               <Input
-                                placeholder={`${label} ${index + 1}`}
+                                placeholder={placeholders[index]}
                                 {...field}
                               />
                             </FormControl>

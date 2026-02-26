@@ -36,7 +36,7 @@ export function LoadingScreen({
 
         <div className="mt-8">
           <p className="text-sm text-yellow-300">
-            [RAW PROMPT] Sending to Gemini API...
+            [生プロンプト] Gemini APIへ送信中...
           </p>
           <pre className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-left select-all">
             {fullPrompt}
@@ -49,7 +49,7 @@ export function LoadingScreen({
 
       {/* For LLMO/SEO */}
       <div className="sr-only">
-        <h2>生プロンプト</h2>
+        <h2>生プロンプT</h2>
         <pre>{fullPrompt}</pre>
         <h2>免責事項</h2>
         <p>{DISCLAIMERS}</p>

@@ -69,30 +69,8 @@ const generatePhilosophicalProfileFlow = ai.defineFlow(
     outputSchema: GeneratePhilosophicalProfileOutputSchema,
   },
   async input => {
-    const response = await generatePhilosophicalProfilePrompt(input);
-    const output = response.output;
-
-    if (!output) {
-      let errorDetails = 'AIから有効な応答がありませんでした。';
-      const candidate = response.candidate;
-      if (candidate) {
-        errorDetails += ` 理由: ${candidate.finishReason}`;
-        if (candidate.finishMessage) {
-          errorDetails += `, メッセージ: ${candidate.finishMessage}`;
-        }
-        if (candidate.safetyRatings && candidate.safetyRatings.length > 0) {
-          errorDetails += `, 安全性評価: ${JSON.stringify(
-            candidate.safetyRatings
-          )}`;
-        }
-      }
-      const rawText = response.text;
-      if (rawText) {
-        errorDetails += `\nAIの生テキスト応答: "${rawText}"`;
-      }
-      throw new Error(errorDetails);
-    }
-    return output;
+    const {output} = await generatePhilosophicalProfilePrompt(input);
+    return output!;
   }
 );
 

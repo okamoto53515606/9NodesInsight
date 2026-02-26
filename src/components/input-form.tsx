@@ -48,20 +48,23 @@ type FormValues = z.infer<typeof formSchema>;
 const formFields: {
   category: 'song' | 'book' | 'word';
   label: string;
+  example?: string;
   keys: (keyof FormValues)[];
   placeholders: string[];
 }[] = [
   {
     category: 'song',
     label: '好きな曲',
+    example: '（例）Vaundy「怪獣の花唄」',
     keys: ['song1', 'song2', 'song3'],
-    placeholders: ['（例）Vaundy「怪獣の花唄」', '好きな曲 2', '好きな曲 3'],
+    placeholders: ['アーティスト名「曲名」', '好きな曲 2', '好きな曲 3'],
   },
   {
     category: 'book',
     label: '好きな本',
+    example: '（例）東野圭吾「白鳥とコウモリ」',
     keys: ['book1', 'book2', 'book3'],
-    placeholders: ['（例）東野圭吾「白鳥とコウモリ」', '好きな本 2', '好きな本 3'],
+    placeholders: ['著者名「書籍名」', '好きな本 2', '好きな本 3'],
   },
   {
     category: 'word',
@@ -121,9 +124,14 @@ export function InputForm({
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleFormSubmit)}>
             <CardContent className="space-y-8">
-              {formFields.map(({ category, label, keys, placeholders }) => (
+              {formFields.map(({ category, label, keys, placeholders, example }) => (
                 <div key={category} className="space-y-4">
-                  <h3 className="font-semibold text-lg text-primary">{label}</h3>
+                  <div className="flex items-baseline gap-2">
+                    <h3 className="font-semibold text-lg text-primary">{label}</h3>
+                    {example && (
+                      <span className="text-sm text-muted-foreground">{example}</span>
+                    )}
+                  </div>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                     {keys.map((key, index) => (
                       <FormField

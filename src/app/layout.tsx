@@ -38,6 +38,8 @@ const jsonLd = {
   applicationCategory: 'ProductivityApplication',
 };
 
+export const maxDuration = 300;
+
 export default function RootLayout({
   children,
 }: Readonly<{

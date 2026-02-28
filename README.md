@@ -1,5 +1,1 @@
-# Firebase Studio
-
-This is a NextJS starter in Firebase Studio.
-
-To get started, take a look at src/app/page.tsx.
+ユーザーが入力した「好きな曲3つ」「本3つ」「言葉3つ」「AIへの一言」の計10項目から、ジャンルという表面的な分類を排除し、深層にある「構造の哲学」をLLM（Gemini API）でプロファイリングする診断アプリです。

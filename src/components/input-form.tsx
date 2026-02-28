@@ -120,7 +120,7 @@ export function InputForm({
             </CardTitle>
           </div>
           <CardDescription>
-            10個の入力から、あなたの深層にある「構造の哲学」を分析します。
+            10個の入力から、あなたの深層にある「本質的なこだわり」を分析します。
           </CardDescription>
         </CardHeader>
         <Form {...form}>

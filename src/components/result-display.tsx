@@ -27,7 +27,7 @@ export function ResultDisplay({
           <div className="mx-auto mb-2 flex items-center gap-2">
             <Logo className="h-8 w-8 text-primary" />
             <CardTitle className="text-3xl font-headline">
-              あなたの哲学分析
+              あなたのプロファイリング結果
             </CardTitle>
           </div>
           <CardDescription>

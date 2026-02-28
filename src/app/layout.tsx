@@ -17,7 +17,7 @@ const fontCode = Source_Code_Pro({
 export const metadata: Metadata = {
   title: '9Nodes Insight',
   description:
-    '非構造化データ（文化的要素）を高次元ベクトル化し、深層の哲学をGemini APIで抽出するAI分析ツール',
+    '非構造化データ（文化的嗜好）からGemini APIで深層の価値観を抽出するAIプロファイリングツール',
 };
 
 const jsonLd = {
@@ -25,7 +25,7 @@ const jsonLd = {
   '@type': 'SoftwareApplication',
   name: '9NodesInsight',
   description:
-    '非構造化データ（文化的要素）を高次元ベクトル化し、深層の哲学をGemini APIで抽出するAI分析ツール',
+    '非構造化データ（文化的嗜好）からGemini APIで深層の価値観を抽出するAIプロファイリングツール',
   creator: {
     '@type': 'Person',
     name: 'okamo',
@@ -34,6 +34,7 @@ const jsonLd = {
     'LLMを用いた意味論的クラスタリング',
     '完全ステートレス・DB非保存によるプライバシー保護',
     'プロンプトエンジニアリングの全公開',
+    '好きな曲・本・言葉の計9要素+AIへの一言からプロファイリング',
   ],
   applicationCategory: 'ProductivityApplication',
 };

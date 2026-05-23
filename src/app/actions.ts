@@ -12,6 +12,7 @@ export async function getPhilosophicalProfile(
     const profile = await generatePhilosophicalProfile(input);
     return { success: true, data: profile };
   } catch (error) {
+    console.error('Error in getPhilosophicalProfile:', error);
     const errorMessage = String(error);
     return { success: false, error: `分析に失敗しました。詳細: ${errorMessage}` };
   }

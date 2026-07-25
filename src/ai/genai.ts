@@ -12,7 +12,8 @@ let _genai: GoogleGenAI | null = null;
 
 function getGenAI(): GoogleGenAI {
   if (!_genai) {
-    _genai = new GoogleGenAI({});
+    // Cloud Run 上では ADC より API キーを優先させるため明示的に渡す
+    _genai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
   }
   return _genai;
 }

@@ -35,6 +35,7 @@ export type GeneratePhilosophicalProfileInput = z.infer<
 
 export const GeneratePhilosophicalProfileOutputSchema = z.object({
   profile: z.string().describe('生成された哲学的なプロフィール（Markdown形式）'),
+  searchContext: z.string().describe('Google検索で収集した客観的情報（Markdown形式）'),
 });
 export type GeneratePhilosophicalProfileOutput = z.infer<
   typeof GeneratePhilosophicalProfileOutputSchema

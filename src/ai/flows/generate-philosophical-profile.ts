@@ -33,7 +33,7 @@ export async function generatePhilosophicalProfile(
   // Step 2: 検索結果を踏まえてプロフィールを生成（gemini-3.5-flash-lite）
   const profileText = await generateProfile(input, searchResult);
 
-  return { profile: profileText };
+  return { profile: profileText, searchContext: searchResult };
 }
 
 // ── Step 1: Google検索グラウンディング ──────────────────────────

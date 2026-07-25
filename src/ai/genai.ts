@@ -6,7 +6,7 @@
  * - 生成用モデル: gemini-3.5-flash-lite（メイン生成）
  */
 
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenAI } from '@google/genai/node';
 
 let _genai: GoogleGenAI | null = null;
 

@@ -12,7 +12,7 @@ let _genai: GoogleGenAI | null = null;
 
 function getGenAI(): GoogleGenAI {
   if (!_genai) {
-    _genai = new GoogleGenAI();
+    _genai = new GoogleGenAI({});
   }
   return _genai;
 }

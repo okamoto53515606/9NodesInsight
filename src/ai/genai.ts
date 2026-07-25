@@ -12,14 +12,7 @@ let _genai: GoogleGenAI | null = null;
 
 function getGenAI(): GoogleGenAI {
   if (!_genai) {
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      throw new Error(
-        'GEMINI_API_KEY 環境変数が設定されていません。' +
-        'デプロイ先の環境変数設定を確認してください。',
-      );
-    }
-    _genai = new GoogleGenAI({ apiKey });
+    _genai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
   }
   return _genai;
 }

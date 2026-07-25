@@ -1,7 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import type { GeneratePhilosophicalProfileInput } from '@/ai/flows/generate-philosophical-profile';
+import type {
+  GeneratePhilosophicalProfileInput,
+  GeneratePhilosophicalProfileOutput,
+} from '@/ai/flows/generate-philosophical-profile';
 import { getPhilosophicalProfile } from '@/app/actions';
 import { InputForm } from '@/components/input-form';
 import { LoadingScreen } from '@/components/loading-screen';
@@ -14,7 +17,7 @@ export default function Home() {
     formData,
     setFormData,
   ] = useState<GeneratePhilosophicalProfileInput | null>(null);
-  const [result, setResult] = useState('');
+  const [result, setResult] = useState<GeneratePhilosophicalProfileOutput | null>(null);
   const { toast } = useToast();
 
   const handleStart = async (data: GeneratePhilosophicalProfileInput) => {
@@ -40,7 +43,7 @@ export default function Home() {
   const handleReset = () => {
     setStep('form');
     setFormData(null);
-    setResult('');
+    setResult(null);
   };
 
   const renderStep = () => {
@@ -48,7 +51,9 @@ export default function Home() {
       case 'loading':
         return <LoadingScreen formData={formData!} />;
       case 'result':
-        return <ResultDisplay profile={result} onReset={handleReset} />;
+        return result ? (
+          <ResultDisplay profile={result} onReset={handleReset} />
+        ) : null;
       case 'form':
       default:
         return <InputForm onSubmit={handleStart} initialData={formData} />;

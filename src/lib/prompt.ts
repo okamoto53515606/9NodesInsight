@@ -83,8 +83,9 @@ export const PHILOSOPHICAL_PROFILE_PROMPT = `
 - 特にGoogle検索結果から得られた客観情報を活用し、
   ユーザーの主観的解釈とは異なる視点を提示せよ。
 
-# Output Format (Markdown)
-profileフィールドには以下のMarkdown形式で記述してください。
+# Output Format
+以下のMarkdown形式で**直接**出力してください。
+フィールド名（profile: など）やYAML形式のプレフィックスは絶対に付けないでください。
 
 ## 【タイトル】（キャッチーで印象に残る1行）
 ## 1. 9つの点から見えた「たったひとつの共通項」

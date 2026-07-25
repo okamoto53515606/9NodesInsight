@@ -105,9 +105,14 @@ async function generateProfile(
   const response = await ai.models.generateContent({
     model: GENERATE_MODEL,
     contents: prompt,
+    config: {
+      responseMimeType: 'text/plain',
+    },
   });
 
-  const text = response.text ?? '';
+  let text = response.text ?? '';
+  // モデルが誤って "profile:" や "profile: |" プレフィックスを付けた場合に除去
+  text = text.replace(/^profile:\s*\|?\s*/i, '').trim();
   console.log('[generateProfile] Generation completed, length:', text.length);
   return text;
 }

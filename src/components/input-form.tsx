@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import type { GeneratePhilosophicalProfileInput } from '@/ai/flows/generate-philosophical-profile';
+import type { GeneratePhilosophicalProfileInput } from '@/ai/schemas';
 import { Button } from '@/components/ui/button';
 import {
   Card,

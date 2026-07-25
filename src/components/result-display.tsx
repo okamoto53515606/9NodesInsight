@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/card';
 import { MarkdownRenderer } from './markdown-renderer';
 import { Logo } from './icons';
-import { GeneratePhilosophicalProfileOutput } from '@/ai/flows/generate-philosophical-profile';
+import type { GeneratePhilosophicalProfileOutput } from '@/ai/schemas';
 
 export function ResultDisplay({
   profile,

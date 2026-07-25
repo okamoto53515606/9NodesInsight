@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import type { GeneratePhilosophicalProfileInput } from '@/ai/flows/generate-philosophical-profile';
+import type { GeneratePhilosophicalProfileInput } from '@/ai/schemas';
 import { DISCLAIMERS, PHILOSOPHICAL_PROFILE_PROMPT } from '@/lib/prompt';
 
 export function LoadingScreen({

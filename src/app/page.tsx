@@ -4,7 +4,7 @@ import { useState } from 'react';
 import type {
   GeneratePhilosophicalProfileInput,
   GeneratePhilosophicalProfileOutput,
-} from '@/ai/flows/generate-philosophical-profile';
+} from '@/ai/schemas';
 import { getPhilosophicalProfile } from '@/app/actions';
 import { InputForm } from '@/components/input-form';
 import { LoadingScreen } from '@/components/loading-screen';

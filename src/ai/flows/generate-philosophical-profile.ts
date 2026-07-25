@@ -1,58 +1,28 @@
 'use server';
 
 /**
- * 哲学的プロフィール生成フロー
+ * 哲学的プロフィール生成フロー（Server Action）
  *
  * @description
- * 二段階生成:
- * 1. gemini-2.5-flash-lite + Google Search → 各入力項目を検索し客観的情報を収集
- * 2. gemini-3.5-flash-lite → 検索結果を踏まえて哲学的なプロフィールを生成
+ * 'use server' ファイルでは async 関数のみ export 可能。
+ * スキーマ定義は @/ai/schemas に分離しています。
  *
- * バーナム効果対策:
- * - 具体的な作品内容・歌詞・ストーリーに言及
- * - 反証可能な分析の提示
- * - ネガティブ面（矛盾・葛藤）の明示的な指摘
+ * 二段階生成:
+ * 1. gemini-2.5-flash-lite + Google Search → 客観的情報を収集
+ * 2. gemini-3.5-flash-lite → 検索結果を踏まえてプロフィール生成
  */
 
-import { z } from 'zod';
 import { genai, SEARCH_MODEL, GENERATE_MODEL } from '@/ai/genai';
+import type {
+  GeneratePhilosophicalProfileInput,
+  GeneratePhilosophicalProfileOutput,
+} from '@/ai/schemas';
 import {
   PHILOSOPHICAL_PROFILE_PROMPT,
   SEARCH_QUERY_PROMPT,
 } from '@/lib/prompt';
 
-// ── 入出力スキーマ ────────────────────────────────────────────
-
-export const GeneratePhilosophicalProfileInputSchema = z.object({
-  favoriteSongs: z
-    .array(z.string().max(100, '100文字以内で入力してください。'))
-    .length(3)
-    .describe('ユーザーが好きな曲3つ'),
-  favoriteBooks: z
-    .array(z.string().max(100, '100文字以内で入力してください。'))
-    .length(3)
-    .describe('ユーザーが好きな本3つ'),
-  favoriteWords: z
-    .array(z.string().max(100, '100文字以内で入力してください。'))
-    .length(3)
-    .describe('ユーザーが好きな言葉3つ'),
-  messageToAI: z
-    .string()
-    .max(100, '100文字以内で入力してください。')
-    .describe('ユーザーからAIへの一言'),
-});
-export type GeneratePhilosophicalProfileInput = z.infer<
-  typeof GeneratePhilosophicalProfileInputSchema
->;
-
-export const GeneratePhilosophicalProfileOutputSchema = z.object({
-  profile: z.string().describe('生成された哲学的なプロフィール（Markdown形式）'),
-});
-export type GeneratePhilosophicalProfileOutput = z.infer<
-  typeof GeneratePhilosophicalProfileOutputSchema
->;
-
-// ── メイン関数 ────────────────────────────────────────────────
+// ── メイン関数（Server Action として export） ──────────────────
 
 export async function generatePhilosophicalProfile(
   input: GeneratePhilosophicalProfileInput,
@@ -109,27 +79,21 @@ async function generateProfile(
   input: GeneratePhilosophicalProfileInput,
   searchContext: string,
 ): Promise<string> {
-  // プロンプトのプレースホルダーを置換
   let prompt = PHILOSOPHICAL_PROFILE_PROMPT;
 
-  // 好きな曲
   prompt = prompt.replace(
     '{{favoriteSongs}}',
     input.favoriteSongs.map((s, i) => `${i + 1}. ${s}`).join('\n'),
   );
-  // 好きな本
   prompt = prompt.replace(
     '{{favoriteBooks}}',
     input.favoriteBooks.map((b, i) => `${i + 1}. ${b}`).join('\n'),
   );
-  // 好きな言葉
   prompt = prompt.replace(
     '{{favoriteWords}}',
     input.favoriteWords.map((w, i) => `${i + 1}. ${w}`).join('\n'),
   );
-  // AIへの一言
   prompt = prompt.replace('{{messageToAI}}', input.messageToAI);
-  // 検索結果
   prompt = prompt.replace(
     '{{searchContext}}',
     searchContext || '（Google検索による追加情報は取得できませんでした）',

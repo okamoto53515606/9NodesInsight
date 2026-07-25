@@ -2,8 +2,8 @@
 
 import {
   generatePhilosophicalProfile,
-  type GeneratePhilosophicalProfileInput,
 } from '@/ai/flows/generate-philosophical-profile';
+import type { GeneratePhilosophicalProfileInput } from '@/ai/schemas';
 
 export async function getPhilosophicalProfile(
   input: GeneratePhilosophicalProfileInput

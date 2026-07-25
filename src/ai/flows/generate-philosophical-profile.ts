@@ -83,18 +83,22 @@ async function searchWithGrounding(
   );
 
   try {
-    const response = await genai.models.generateContent({
+    const ai = genai();
+    console.log('[searchWithGrounding] Starting Google Search with model:', SEARCH_MODEL);
+
+    const response = await ai.models.generateContent({
       model: SEARCH_MODEL,
       contents: searchPrompt,
       config: {
         tools: [{ googleSearch: {} }],
-        temperature: 0.1, // 検索は低温度で事実重視
       },
     });
 
-    return response.text ?? '';
+    const text = response.text ?? '';
+    console.log('[searchWithGrounding] Search completed, length:', text.length);
+    return text;
   } catch (error) {
-    console.error('Search grounding failed, continuing without search:', error);
+    console.error('[searchWithGrounding] Failed:', error);
     return ''; // 検索失敗時は検索なしで続行
   }
 }
@@ -131,14 +135,15 @@ async function generateProfile(
     searchContext || '（Google検索による追加情報は取得できませんでした）',
   );
 
-  const response = await genai.models.generateContent({
+  const ai = genai();
+  console.log('[generateProfile] Starting profile generation with model:', GENERATE_MODEL);
+
+  const response = await ai.models.generateContent({
     model: GENERATE_MODEL,
     contents: prompt,
-    config: {
-      temperature: 0.8,
-      maxOutputTokens: 4096,
-    },
   });
 
-  return response.text ?? '';
+  const text = response.text ?? '';
+  console.log('[generateProfile] Generation completed, length:', text.length);
+  return text;
 }

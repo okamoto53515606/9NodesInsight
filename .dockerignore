@@ -1,0 +1,11 @@
+node_modules
+.next
+.git
+.gitignore
+.env*
+docs
+prompt_history
+.idx
+*.md
+LICENSE
+apphosting.yaml

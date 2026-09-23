@@ -1,8 +1,9 @@
 # ---- Stage 1: Dependencies ----
 FROM node:22-slim AS deps
 WORKDIR /app
-COPY package.json ./
-RUN npm install --legacy-peer-deps
+# lockfile を含めてコピーし、npm ci で固定されたバージョンを再現性高くインストールする
+COPY package.json package-lock.json ./
+RUN npm ci --legacy-peer-deps
 
 # ---- Stage 2: Build ----
 FROM node:22-slim AS builder

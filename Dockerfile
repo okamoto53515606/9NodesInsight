@@ -1,12 +1,13 @@
 # ---- Stage 1: Dependencies ----
-FROM node:22-slim AS deps
+# Node 24 系（CVE-2026-111497 修正版 24.22.1 以降を取得するためマイナー指定なし）
+FROM node:24-slim AS deps
 WORKDIR /app
 # lockfile を含めてコピーし、npm ci で固定されたバージョンを再現性高くインストールする
 COPY package.json package-lock.json ./
 RUN npm ci --legacy-peer-deps
 
 # ---- Stage 2: Build ----
-FROM node:22-slim AS builder
+FROM node:24-slim AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -17,7 +18,7 @@ ARG NEXT_PUBLIC_GOOGLE_GENAI_API_KEY
 RUN npm run build
 
 # ---- Stage 3: Runner ----
-FROM node:22-slim AS runner
+FROM node:24-slim AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production

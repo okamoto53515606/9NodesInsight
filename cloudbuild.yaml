@@ -2,6 +2,8 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
+      # ベースイメージの最新パッチ（node:24-slim など）を確実に取り込む
+      - '--pull'
       - '-t'
       - '${_IMAGE_TAG}'
       - '.'
